@@ -1,0 +1,16 @@
+{
+  "expo": {
+    "name": "DontBeBroke",
+    "slug": "dontbebroke",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "dark",
+    "backgroundColor": "#0A0F0D",
+    "android": {
+      "package": "com.shivansh.dontbebroke",
+      "adaptiveIcon": {
+        "backgroundColor": "#0A0F0D"
+      }
+    }
+  }
+}
