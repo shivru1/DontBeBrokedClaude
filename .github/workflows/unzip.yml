@@ -15,8 +15,8 @@ jobs:
 
       - name: Extract zip and organize
         run: |
-          unzip -o project.zip
-          rm project.zip
+          unzip -o dontbebroke.zip
+          rm dontbebroke.zip
           # If files were zipped inside an extra subfolder, move them to root
           if [ ! -f "package.json" ]; then
             SUBDIR=$(find . -maxdepth 2 -name "package.json" -exec dirname {} \;)
