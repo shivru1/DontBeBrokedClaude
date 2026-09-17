@@ -1,0 +1,35 @@
+name: Unpack Project Zip
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  unzip:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Extract zip and organize
+        run: |
+          unzip -o project.zip
+          rm project.zip
+          # If files were zipped inside an extra subfolder, move them to root
+          if [ ! -f "package.json" ]; then
+            SUBDIR=$(find . -maxdepth 2 -name "package.json" -exec dirname {} \;)
+            if [ -n "$SUBDIR" ] && [ "$SUBDIR" != "." ]; then
+              cp -r $SUBDIR/* .
+              rm -rf $SUBDIR
+            fi
+          fi
+
+      - name: Commit unzipped files
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Unpack project.zip into repository root"
+          git push
